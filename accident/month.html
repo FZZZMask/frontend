@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- including ECharts file -->
+    <script src="https://source.vvzero.com/resource/web/echarts/echarts.min.js"></script>
+    <script src="https://source.vvzero.com/resource/web/jquery/jquery-3.3.1.min.js"></script>
+    <title>Accident MAP</title>
+    <style type="text/css">
+        .button {
+            font: bold 33px Arial;
+            text-decoration: none;
+            background-color: #EEEEEE;
+            color: #333333;
+            padding: 4px 12px 4px 12px;
+            border-top: 1px solid #CCCCCC;
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            border-left: 1px solid #CCCCCC;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- preparing a DOM with width and height for ECharts -->
+    <div id="main" style="width:900px; height:700px; margin: 0 auto;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+
+        myChart.showLoading();
+
+        $.get('jiangsu.json', function (geoJson)
+        {
+            myChart.hideLoading();
+
+            echarts.registerMap('HK', geoJson);
+            option = {
+                title: {
+                    text: '江苏省FZZZMask用户事故率',
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}<br/>{c} (p / km2)'
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    left: 'right',
+                    top: 'center',
+                    feature: {
+                        dataView: { readOnly: false },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                visualMap: {
+                    min: 0,
+                    max: 10,
+                    text: ['High', 'Low'],
+                    realtime: false,
+                    calculable: true,
+                    inRange: {
+                        color: ['lightskyblue', 'yellow', 'orangered']
+                    }
+                },
+                series: [
+                    {
+                        name: '江苏省FZZZMask用户事故率',
+                        type: 'map',
+                        mapType: 'HK', // 自定义扩展图表类型
+                        itemStyle: {
+                            normal: { label: { show: true } },
+                            emphasis: { label: { show: true } }
+                        },
+                        data: [
+                            { name: '南京市', value: 0 },
+                            { name: '无锡市', value: 0 },
+                            { name: '徐州市', value: 0 },
+                            { name: '常州市', value: 0 },
+                            { name: '苏州市', value: 0 },
+                            { name: '南通市', value: 0 },
+                            { name: '连云港市', value: 0 },
+                            { name: '淮安市', value: 0 },
+                            { name: '盐城市', value: 0 },
+                            { name: '扬州市', value: 0 },
+                            { name: '镇江市', value: 0 },
+                            { name: '泰州市', value: 0 },
+                            { name: '宿迁市', value: 0 },
+                        ],
+                    }
+                ]
+            }
+            $.get("http://192.168.1.103:8000/api/v1/visual/health/?granularity=monthly", function (data)
+            // $.get("mdata.json", function (data)
+            {
+                //console.log("success");
+                var count = 0;
+                for (var i in data)
+                {
+                    //console.log(count);
+                    option.series[0].data[count].name = i;
+                    option.series[0].data[count].value = data[i];
+                    count++;
+                }
+                //console.log(option.series[0].data)
+                myChart.setOption(option);
+            })
+
+
+        });
+    </script>
+    <div style="text-align: center">
+        <a class="button" href="day.html">每日报告</a>
+        <a class="button" href="week.html">每周报告</a>
+        <a class="button" href="month.html">每月报告</a>
+    </div>
+</body>
+
+</html>
