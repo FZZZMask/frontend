@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://source.vvzero.com/resource/web/jquery/jquery-3.3.1.min.js"></script>
+    <title>TEST</title>
+</head>
+
+<body>
+    <script>
+        var jqxhr = $.get("data.txt", function (data)
+        {
+            console.log("success");
+            $.parseJSON(data);
+        })
+    </script>
+</body>
+
+</html>
