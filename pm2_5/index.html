@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <script src="https://source.vvzero.com/resource/web/jquery/jquery-3.3.1.min.js"></script>
+    <title>PM2.5 MAp</title>
 </head>
 
 <body style="height: 100%; margin: 0">
@@ -21,7 +22,8 @@
 
 
 
-        $.get("http://192.168.1.103:8000/api/v1/visual/pm25/", function (jsondata)
+        $.get("http://hackathonATEastChina.triplez.cn:8888/api/v1/visual/pm25/", function (jsondata)
+        // $.get("data.json", function (jsondata)
         {
             console
             var dom = document.getElementById("container");
@@ -30,7 +32,9 @@
             option = null;
             // var COLORS = ["#ffffff", "#E8E8E8", "#B5B5B5", "#828282", "#4F4F4F", "#000000"];
            var COLORS = ["#000000", "#4F4F4F", "#828282", "#B5B5B5", "#E8E8E8", "#ffffff"];
-            var lngExtent = [31.58, 32.05];
+            // var lngExtent = [31.58, 32.05];
+            // var latExtent = [118.46, 119.03];
+            var lngExtent = [31.78, 32.25];
             var latExtent = [118.46, 119.03];
             var cellCount = [50, 50];
             var cellSizeCoord = [

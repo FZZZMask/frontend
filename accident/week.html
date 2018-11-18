@@ -41,7 +41,7 @@
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter: '{b}<br/>{c} (p / km2)'
+                    formatter: '{b}<br/>{c} 例'
                 },
                 toolbox: {
                     show: true,
@@ -91,7 +91,7 @@
                     }
                 ]
             }
-            $.get("http://192.168.1.103:8000/api/v1/visual/health/?granularity=weekly", function (data)
+            $.get("http://hackathonATEastChina.triplez.cn:8888/api/v1/visual/health/?granularity=weekly", function (data)
             // $.get("wdata.json", function (data)
             {
                 //console.log("success");

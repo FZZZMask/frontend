@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <script src="https://source.vvzero.com/resource/web/jquery/jquery-3.3.1.min.js"></script>
+    <title>sickMap</title>
 </head>
 
 <body style="height: 100%; margin: 0">
@@ -21,14 +22,17 @@
 
 
 
-        $.get("data.json", function (jsondata)
+        $.get("http://hackathonATEastChina.triplez.cn:8888/api/v1/visual/cold/", function (jsondata)
+        // $.get("data.json", function (jsondata)
         {
             var dom = document.getElementById("container");
             var myChart = echarts.init(dom);
             var app = {};
             option = null;
             var COLORS = ["#000000", "#002966", "#005ce6", "#3385ff", "#99c2ff", "#ffffff"];
-            var lngExtent = [31.58, 32.05];
+            // var lngExtent = [31.58, 32.05];
+            // var latExtent = [118.46, 119.03];
+            var lngExtent = [31.78, 32.25];
             var latExtent = [118.46, 119.03];
             var cellCount = [50, 50];
             var cellSizeCoord = [
